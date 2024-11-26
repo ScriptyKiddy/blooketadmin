@@ -5,12 +5,11 @@ const skibidiCheckbox = document.getElementById('skibidiCheckbox');
 const loginButton = document.getElementById('loginButton');
 
 // Enable or disable the login button based on checkbox state
-skibidiCheckbox.addEventListener('change', function() {
+function validateCheckbox() {
     if (!skibidiCheckbox.checked) {
                 skibidiCheckbox.classList.add('error');
                 alert('Please Check The Box.');
-    }
-});
+    });
 
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
